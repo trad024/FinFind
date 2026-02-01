@@ -37,7 +37,22 @@ apiClient.interceptors.request.use(
   (config) => {
     // Add user ID from localStorage if available
     if (typeof window !== "undefined") {
-      const userId = localStorage.getItem("userId");
+      let userId = localStorage.getItem("userId");
+      
+      // Migrate old IDs to new UUIDs
+      const ID_MIGRATION: Record<string, string> = {
+        "demo_student_001": "99b53b96-6d17-5a4b-ba92-e995a8a71123",
+        "demo_professional_001": "666fd4d6-f4bf-592c-b9ab-c3edbeac4a00",
+        "demo_parent_001": "dc2c198d-b816-569f-9d26-3c71020596e7",
+        "demo-user-001": "d486a14c-d0f4-5f8b-aa8f-f50ec0a14de4",
+        "guest": "0f9233b1-7390-515d-9787-175006338642",
+      };
+      
+      if (userId && ID_MIGRATION[userId]) {
+        userId = ID_MIGRATION[userId];
+        localStorage.setItem("userId", userId); // Update to new ID
+      }
+      
       if (userId) {
         config.headers["X-User-ID"] = userId;
       }

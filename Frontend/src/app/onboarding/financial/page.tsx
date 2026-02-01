@@ -98,7 +98,7 @@ export default function FinancialPage() {
 
     // Save complete profile
     const userProfile = {
-      id: "demo-user-001",
+      id: "d486a14c-d0f4-5f8b-aa8f-f50ec0a14de4",  // demo-user-001 UUID
       name: localStorage.getItem("userName") || "Demo User",
       email: localStorage.getItem("userEmail") || "demo@finfind.com",
       financialProfile: {

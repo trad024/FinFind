@@ -24,7 +24,7 @@ import { useSearch, useImageSearch, useUser, useCategories, useBrands, useLogPro
 import type { SearchFilters, SortOrder } from "@/types";
 
 // Demo user ID - in production this would come from auth
-const DEMO_USER_ID = "013c3cb2-482a-55b0-9559-6688c3b78313";
+const DEMO_USER_ID = "d486a14c-d0f4-5f8b-aa8f-f50ec0a14de4";
 
 function SearchPageContent() {
   const searchParams = useSearchParams();

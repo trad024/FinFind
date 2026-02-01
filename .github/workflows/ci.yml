@@ -8,6 +8,8 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  workflow_call:
+    # Allow this workflow to be called by other workflows (e.g., deploy.yml)
 
 env:
   PYTHON_VERSION: '3.11'

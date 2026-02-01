@@ -21,7 +21,7 @@ export interface DemoUser {
 
 export const DEMO_USERS: DemoUser[] = [
   {
-    id: "demo_student_001",
+    id: "99b53b96-6d17-5a4b-ba92-e995a8a71123",  // demo_student_001
     name: "Sarah Chen",
     email: "sarah.chen@demo.edu",
     persona: "college_student",
@@ -33,7 +33,7 @@ export const DEMO_USERS: DemoUser[] = [
     },
   },
   {
-    id: "demo_professional_001",
+    id: "666fd4d6-f4bf-592c-b9ab-c3edbeac4a00",  // demo_professional_001
     name: "Marcus Johnson",
     email: "marcus.j@demo.tech",
     persona: "software_engineer",
@@ -45,7 +45,7 @@ export const DEMO_USERS: DemoUser[] = [
     },
   },
   {
-    id: "demo_parent_001",
+    id: "dc2c198d-b816-569f-9d26-3c71020596e7",  // demo_parent_001
     name: "Jennifer Martinez",
     email: "jen.martinez@demo.family",
     persona: "budget_conscious_parent",
@@ -57,7 +57,7 @@ export const DEMO_USERS: DemoUser[] = [
     },
   },
   {
-    id: "guest",
+    id: "0f9233b1-7390-515d-9787-175006338642",  // guest
     name: "Guest User",
     email: "guest@finfind.demo",
     persona: "guest",
@@ -86,16 +86,40 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const STORAGE_KEY = "finfind_current_user";
 
+// Migration map for old IDs to new UUIDs
+const ID_MIGRATION_MAP: Record<string, string> = {
+  "demo_student_001": "99b53b96-6d17-5a4b-ba92-e995a8a71123",
+  "demo_professional_001": "666fd4d6-f4bf-592c-b9ab-c3edbeac4a00",
+  "demo_parent_001": "dc2c198d-b816-569f-9d26-3c71020596e7",
+  "demo-user-001": "d486a14c-d0f4-5f8b-aa8f-f50ec0a14de4",
+  "guest": "0f9233b1-7390-515d-9787-175006338642",
+};
+
+// Migrate old user IDs to new UUIDs
+function migrateUserId(oldId: string | null): string | null {
+  if (!oldId) return null;
+  return ID_MIGRATION_MAP[oldId] || oldId;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<DemoUser>(DEFAULT_USER);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load user from localStorage on mount
+  // Load user from localStorage on mount (with migration)
   useEffect(() => {
     if (typeof window !== "undefined") {
+      // Migrate old userId if present
+      const legacyUserId = localStorage.getItem("userId");
+      const migratedLegacyId = migrateUserId(legacyUserId);
+      if (migratedLegacyId && migratedLegacyId !== legacyUserId) {
+        localStorage.setItem("userId", migratedLegacyId);
+      }
+
       const storedUserId = localStorage.getItem(STORAGE_KEY);
-      if (storedUserId) {
-        const foundUser = DEMO_USERS.find((u) => u.id === storedUserId);
+      const migratedStoredId = migrateUserId(storedUserId);
+      
+      if (migratedStoredId) {
+        const foundUser = DEMO_USERS.find((u) => u.id === migratedStoredId);
         if (foundUser) {
           setUser(foundUser);
         }

@@ -260,7 +260,7 @@ export function useSendMessage(sessionId?: string) {
         return chatApi.sendMessage({
           sessionId: sessionId || "",
           message: data.message,
-          userId: "013c3cb2-482a-55b0-9559-6688c3b78313",
+          userId: "d486a14c-d0f4-5f8b-aa8f-f50ec0a14de4",
         });
       }
       return chatApi.sendMessage(data as ChatRequest);

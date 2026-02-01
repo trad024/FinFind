@@ -40,7 +40,7 @@ export default function LoginPage() {
     if (email.toLowerCase() === "demo@finfind.com" && password === "demo") {
       // Set user session
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userId", "demo-user-001");
+      localStorage.setItem("userId", "d486a14c-d0f4-5f8b-aa8f-f50ec0a14de4");  // demo-user-001 UUID
       localStorage.setItem("userName", "Demo User");
       localStorage.setItem("userEmail", "demo@finfind.com");
       
