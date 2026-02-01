@@ -1,13 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "name": "finfind-frontend",
   "version": 2,
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "devCommand": "npm run dev",
-  "regions": ["iad1", "sfo1"],
   "env": {
     "NEXT_PUBLIC_API_URL": "@finfind_api_url"
   },
@@ -19,7 +17,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://finfind-backend.fly.dev/:path*"
+      "destination": "https://makrembz-finfind-backend.fly.dev/:path*"
     }
   ],
   "headers": [
