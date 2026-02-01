@@ -1,11 +1,11 @@
 # FinFind Deployment Pipeline
-# Deploys to production on push to main branch
+# Deploys to production on push to main/master branch
 
 name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
     paths-ignore:
       - '**.md'
       - 'docs/**'
