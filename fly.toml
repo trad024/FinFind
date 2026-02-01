@@ -1,7 +1,7 @@
 # Fly.io Deployment Configuration for FinFind Backend
 # https://fly.io/docs/reference/configuration/
 
-app = "makrembz-finfind-backend"
+app = "finfind-api"
 primary_region = "iad"
 kill_signal = "SIGINT"
 kill_timeout = "5s"

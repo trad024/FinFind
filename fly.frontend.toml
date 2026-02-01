@@ -1,7 +1,7 @@
 # Fly.io Deployment Configuration for FinFind Frontend
 # https://fly.io/docs/reference/configuration/
 
-app = "makrembz-finfind-frontend"
+app = "finfind-web"
 primary_region = "iad"
 kill_signal = "SIGINT"
 kill_timeout = "5s"
@@ -10,7 +10,7 @@ kill_timeout = "5s"
   dockerfile = "Frontend/Dockerfile"
   [build.args]
     NODE_VERSION = "20"
-    NEXT_PUBLIC_API_URL = "https://makrembz-finfind-backend.fly.dev"
+    NEXT_PUBLIC_API_URL = "https://finfind-api.fly.dev"
 
 [env]
   NODE_ENV = "production"

@@ -17,7 +17,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://makrembz-finfind-backend.fly.dev/:path*"
+      "destination": "https://finfind-api.fly.dev/:path*"
     }
   ],
   "headers": [
