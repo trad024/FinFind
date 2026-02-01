@@ -351,7 +351,14 @@ export default function RecommendationsPage() {
               {localRecentlyViewed.map((product) => (
                 <ProductCard
                   key={product.id}
-                  product={product}
+                  product={{
+                    ...product,
+                    inStock: true,
+                    relevanceScore: 1,
+                    rating: 0,
+                    reviewCount: 0,
+                    description: '',
+                  }}
                   monthlyBudget={monthlyBudget}
                   showExplanation={false}
                   onAddToCart={() => handleAddToCart(product.id)}
