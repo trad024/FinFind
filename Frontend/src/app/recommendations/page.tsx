@@ -11,7 +11,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ExplanationTooltip } from "@/components/product/ExplanationTooltip";
 import { useRecommendations, useTrendingProducts, useUserBrowsingHistory, useUser } from "@/hooks/useApi";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
-import type { ProductSearchResult, Product } from "@/types";
+import type { ProductSearchResult } from "@/types";
 
 // Demo user ID - in production this would come from auth
 const DEMO_USER_ID = "d486a14c-d0f4-5f8b-aa8f-f50ec0a14de4";
@@ -246,7 +246,7 @@ export default function RecommendationsPage() {
             </div>
           ) : trending.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {trending.map((product: Product, index: number) => (
+              {trending.map((product: ProductSearchResult, index: number) => (
                 <div key={product.id} className="relative">
                   <ProductCard
                     product={product}
