@@ -446,8 +446,7 @@ def run_async():
 # ==============================================================================
 
 @pytest.fixture(autouse=True)
-async def cleanup_after_test():
+def cleanup_after_test():
     """Clean up after each test."""
     yield
     # Any cleanup logic here
-    await asyncio.sleep(0)  # Allow pending tasks to complete
