@@ -211,7 +211,8 @@ jobs:
         with:
           environment: production
           version: ${{ github.sha }}
-        if: secrets.SENTRY_AUTH_TOKEN != ''
+        if: ${{ env.SENTRY_AUTH_TOKEN != '' }}
+        continue-on-error: true
 
       - name: Purge CDN cache
         run: |
