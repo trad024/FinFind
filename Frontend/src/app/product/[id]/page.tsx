@@ -170,7 +170,7 @@ export default function ProductDetailPage() {
       <div className="container mx-auto flex flex-col items-center justify-center px-4 py-16">
         <h1 className="mb-4 text-2xl font-bold">Product not found</h1>
         <p className="mb-8 text-muted-foreground">
-          The product you're looking for doesn't exist or has been removed.
+          The product you&apos;re looking for doesn&apos;t exist or has been removed.
         </p>
         <Button onClick={() => router.push("/")}>Back to Home</Button>
       </div>
@@ -510,7 +510,7 @@ export default function ProductDetailPage() {
                               ))}
                             </div>
                             <span className="text-xs text-muted-foreground">
-                              {new Date(review.createdAt || review.date || Date.now()).toLocaleDateString()}
+                              {new Date(review.createdAt || review.date || '2024-01-01').toLocaleDateString()}
                             </span>
                           </div>
                         </div>

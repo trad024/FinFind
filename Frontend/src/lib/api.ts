@@ -561,7 +561,7 @@ export const recommendationsApi = {
     const reasons = data.reasons || {};
     
     // Map recommendations and attach reasons as matchExplanation
-    const recommendations = (data.recommendations || []).map((product: any) => {
+    const recommendations = (data.recommendations || []).map((product: Record<string, unknown>) => {
       const transformed = transformProduct(product);
       const productReasons = reasons[transformed.id];
       if (productReasons && productReasons.length > 0) {
@@ -603,7 +603,7 @@ export const recommendationsApi = {
     const reasons = data.reasons || {};
     
     // Map recommendations and attach reasons as matchExplanation
-    const recommendations = (data.recommendations || []).map((product: any) => {
+    const recommendations = (data.recommendations || []).map((product: Record<string, unknown>) => {
       const transformed = transformProduct(product);
       const productReasons = reasons[transformed.id];
       if (productReasons && productReasons.length > 0) {

@@ -244,8 +244,8 @@ describe('Screen Reader Support', () => {
     render(
       <nav aria-label="Main navigation">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/search">Search</a></li>
+          <li><span role="link">Home</span></li>
+          <li><span role="link">Search</span></li>
         </ul>
       </nav>
     );

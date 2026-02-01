@@ -362,7 +362,7 @@ describe('Voice Search User Flow', () => {
     render(
       <div data-testid="voice-search">
         <p data-testid="transcription">
-          Transcribed: "wireless headphones under one hundred dollars"
+          Transcribed: {`"wireless headphones under one hundred dollars"`}
         </p>
         <button>Search with this</button>
       </div>

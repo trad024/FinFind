@@ -102,33 +102,37 @@ function migrateUserId(oldId: string | null): string | null {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<DemoUser>(DEFAULT_USER);
+  // Initialize user from localStorage with migration
+  const [user, setUser] = useState<DemoUser>(() => {
+    if (typeof window === "undefined") return DEFAULT_USER;
+    
+    // Migrate old userId if present
+    const legacyUserId = localStorage.getItem("userId");
+    const migratedLegacyId = migrateUserId(legacyUserId);
+    if (migratedLegacyId && migratedLegacyId !== legacyUserId) {
+      localStorage.setItem("userId", migratedLegacyId);
+    }
+
+    const storedUserId = localStorage.getItem(STORAGE_KEY);
+    const migratedStoredId = migrateUserId(storedUserId);
+    
+    if (migratedStoredId) {
+      const foundUser = DEMO_USERS.find((u) => u.id === migratedStoredId);
+      if (foundUser) {
+        return foundUser;
+      }
+    }
+    return DEFAULT_USER;
+  });
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load user from localStorage on mount (with migration)
+  // Mark as loaded and sync userId on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Migrate old userId if present
-      const legacyUserId = localStorage.getItem("userId");
-      const migratedLegacyId = migrateUserId(legacyUserId);
-      if (migratedLegacyId && migratedLegacyId !== legacyUserId) {
-        localStorage.setItem("userId", migratedLegacyId);
-      }
-
-      const storedUserId = localStorage.getItem(STORAGE_KEY);
-      const migratedStoredId = migrateUserId(storedUserId);
-      
-      if (migratedStoredId) {
-        const foundUser = DEMO_USERS.find((u) => u.id === migratedStoredId);
-        if (foundUser) {
-          setUser(foundUser);
-        }
-      }
-      // Also set the legacy userId key for API compatibility
       localStorage.setItem("userId", user.id);
       setIsLoaded(true);
     }
-  }, []);
+  }, [user.id]);
 
   // Sync userId to localStorage when user changes
   useEffect(() => {

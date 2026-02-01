@@ -20,26 +20,26 @@ export interface RecentlyViewedItem {
  * Hook to manage recently viewed products
  */
 export function useRecentlyViewed() {
-  const [items, setItems] = useState<RecentlyViewedItem[]>([]);
+  // Initialize state from localStorage
+  const [items, setItems] = useState<RecentlyViewedItem[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as RecentlyViewedItem[];
+        const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+        return parsed.filter((item) => item.viewedAt > thirtyDaysAgo);
+      }
+    } catch (error) {
+      console.error("Failed to load recently viewed:", error);
+    }
+    return [];
+  });
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load from localStorage on mount
+  // Mark as loaded on mount
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-          const parsed = JSON.parse(stored) as RecentlyViewedItem[];
-          // Filter out items older than 30 days
-          const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
-          const filtered = parsed.filter((item) => item.viewedAt > thirtyDaysAgo);
-          setItems(filtered);
-        }
-      } catch (error) {
-        console.error("Failed to load recently viewed:", error);
-      }
-      setIsLoaded(true);
-    }
+    setIsLoaded(true);
   }, []);
 
   // Save to localStorage when items change

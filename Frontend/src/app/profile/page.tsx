@@ -265,7 +265,7 @@ export default function ProfilePage() {
             <CardHeader>
               <CardTitle className="text-lg">Favorite Categories</CardTitle>
               <CardDescription>
-                Select categories you're interested in for better recommendations
+                Select categories you&apos;re interested in for better recommendations
               </CardDescription>
             </CardHeader>
             <CardContent>

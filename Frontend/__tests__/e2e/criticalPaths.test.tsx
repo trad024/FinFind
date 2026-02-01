@@ -217,7 +217,7 @@ describe('E2E: Multimodal Search Journey', () => {
       <div data-testid="voice-search-modal">
         <h2>Voice Search</h2>
         <p data-testid="transcription">
-          "affordable wireless headphones"
+          {`"affordable wireless headphones"`}
         </p>
         <button data-testid="search-button">Search</button>
       </div>
@@ -228,7 +228,7 @@ describe('E2E: Multimodal Search Journey', () => {
     // Step 4: Show results
     rerender(
       <div data-testid="search-results">
-        <p>Results for: "affordable wireless headphones"</p>
+        <p>Results for: {`"affordable wireless headphones"`}</p>
         <div data-testid="product-card">Budget Headphones - $49.99</div>
       </div>
     );
