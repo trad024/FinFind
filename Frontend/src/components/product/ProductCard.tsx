@@ -173,7 +173,7 @@ export function ProductCard({
               <Link2 className="mr-2 h-4 w-4" />
               Copy link
             </DropdownMenuItem>
-            {typeof navigator !== "undefined" && navigator.share && (
+            {typeof navigator !== "undefined" && typeof navigator.share === "function" && (
               <DropdownMenuItem onClick={handleShareNative}>
                 <Share2 className="mr-2 h-4 w-4" />
                 Share...
