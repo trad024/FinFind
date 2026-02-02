@@ -61,25 +61,3 @@ EXPOSE ${PORT}
 
 # Run the application (use shell form to allow env var substitution)
 CMD uvicorn app.api.main:app --host 0.0.0.0 --port ${PORT:-8000}
-
-# ==============================================================================
-# Stage 3: Development
-# ==============================================================================
-FROM production as development
-
-USER root
-
-# Install development dependencies
-RUN pip install --no-cache-dir \
-    pytest \
-    pytest-asyncio \
-    pytest-cov \
-    httpx \
-    black \
-    flake8 \
-    mypy
-
-USER appuser
-
-# Development command with hot reload
-CMD ["python", "-m", "uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
