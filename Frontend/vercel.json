@@ -7,11 +7,11 @@
   "installCommand": "npm install",
   "devCommand": "npm run dev",
   "env": {
-    "NEXT_PUBLIC_API_URL": "@finfind_api_url"
+    "NEXT_PUBLIC_API_URL": "https://finfind-api.fly.dev"
   },
   "build": {
     "env": {
-      "NEXT_PUBLIC_API_URL": "@finfind_api_url"
+      "NEXT_PUBLIC_API_URL": "https://finfind-api.fly.dev"
     }
   },
   "rewrites": [
