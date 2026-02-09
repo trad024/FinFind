@@ -111,6 +111,7 @@ jobs:
             npm-audit-results.json
 
       - name: Create issue for vulnerabilities
+        continue-on-error: true
         uses: actions/github-script@v6
         with:
           script: |
